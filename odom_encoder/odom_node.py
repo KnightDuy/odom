@@ -64,14 +64,14 @@ class OdomFromVel(Node):
             depth=10
         )
 
-        self.odom_pub = self.create_publisher(Odometry, '/odom', qos)
+        self.odom_pub = self.create_publisher(Odometry, '/robot1/odom', qos)
 
         self.x = 0.0
         self.y = 0.0
         self.th = 0.0
         self.last_time = None
 
-        self.create_subscription(TwistStamped, '/vel_encoder/data', self.encoder_callback, qos)
+        self.create_subscription(TwistStamped, '/robot1/vel_encoder/data', self.encoder_callback, qos)
 
         # Covariances
         self.pose_covariance = [0.01] + [0.0]*35
