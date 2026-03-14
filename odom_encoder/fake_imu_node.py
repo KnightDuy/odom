@@ -38,12 +38,12 @@ class ImuMagFilter(Node):
         qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
 
         # Sub
-        self.create_subscription(Imu, '/robot2/imu/data', self.imu_callback, qos)
-        self.create_subscription(MagneticField, '/robot2/mag/data', self.mag_callback, qos)
+        self.create_subscription(Imu, '/robot1/imu/data', self.imu_callback, qos)
+        self.create_subscription(MagneticField, '/robot1/mag/data', self.mag_callback, qos)
 
         # Pub
-        self.pub_imu = self.create_publisher(Imu, '/robot2/imu/filtered', qos)
-        self.pub_mag = self.create_publisher(MagneticField, '/robot2/mag/filtered', qos)
+        self.pub_imu = self.create_publisher(Imu, '/robot1/imu/filtered', qos)
+        self.pub_mag = self.create_publisher(MagneticField, '/robot1/mag/filtered', qos)
 
         self.get_logger().info("Optimized IMU + MAG filter running")
 
