@@ -64,14 +64,14 @@ class OdomFromVel(Node):
             depth=10
         )
 
-        self.odom_pub = self.create_publisher(Odometry, '/robot1/odom', qos)
+        self.odom_pub = self.create_publisher(Odometry, '/robot2/odom', qos)
 
         self.x = 0.0
         self.y = 0.0
         self.th = 0.0
         self.last_time = None
 
-        self.create_subscription(TwistStamped, '/robot1/vel_encoder/data', self.encoder_callback, qos)
+        self.create_subscription(TwistStamped, '/robot2/vel_encoder/data', self.encoder_callback, qos)
 
         # Covariances
         self.pose_covariance = [0.01] + [0.0]*35
@@ -109,8 +109,8 @@ class OdomFromVel(Node):
 
         odom = Odometry()
         odom.header.stamp = current_time
-        odom.header.frame_id = "robot1_odom"
-        odom.child_frame_id = "robot1_base_link"
+        odom.header.frame_id = "robot2_odom"
+        odom.child_frame_id = "robot2_base_link"
 
         odom.pose.pose.position.x = self.x
         odom.pose.pose.position.y = self.y
